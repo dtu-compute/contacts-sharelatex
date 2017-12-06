@@ -35,7 +35,7 @@ describe "ContactManager", ->
 			it "should increment the contact count and timestamp", ->
 				@db.contacts.update
 					.calledWith({
-						user_id: ObjectId(@user_id)
+						user_id: sinon.match (id) => id.toString = @user_id
 					}, {
 						$inc:
 							"contacts.mock_contact.n": 1
@@ -70,7 +70,7 @@ describe "ContactManager", ->
 			it "should find the user's contacts", ->
 				@db.contacts.findOne
 					.calledWith({
-						user_id: ObjectId(@user_id)
+						user_id: sinon.match (id) => id.toString = @user_id
 					})
 					.should.equal true
 			
